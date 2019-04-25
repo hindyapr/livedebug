@@ -57,11 +57,11 @@ export default {
 
   computed: {
     user () {
-      return this.store.state.projects.user
+      return this.$store.state.projects.data.user
     },
 
     projects () {
-      return this.$store.state.projects.projects
+      return this.$store.state.projects.data.projects
     }
   },
 
@@ -69,14 +69,16 @@ export default {
     $route (newVal) {
       this.isLoading = true
       this.fetchProject(newVal.params.behanceId).then(
-        _ => (this.isLoading = false)
+        _ => {this.isLoading = false}
       )
     }
   },
 
   mounted () {
     this.fetchProject(this.$route.params.behanceId).then(
-      _ => (this.isLoading = false)
+      _ => {
+        this.isLoading = false
+        }
     )
   }
 }
